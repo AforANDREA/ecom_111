@@ -11,7 +11,7 @@ function power($num1, $num2)
     return pow($num1, $num2);
 }
 
-$number1 = 2;
+$number1 = 2; //$StudentName
 $number2 = 6;
 $result = power($number1, $number2); //calling function
 echo "<br>result is $result";
