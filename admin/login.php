@@ -1,14 +1,34 @@
 <?php
+require_once "dbconnect.php";
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (isset($_POST['btnLogin'])) //login request
 {
-    $email =  $_POST['email']; //it is name attribute value of form contract
-    $password = $_POST['password'];
-    $hashcode = "$2y$10\$jnZGZmoV06lXbWi.l19h2e5fTKWeI1ts5qPf2nVto1LY3pFF/ld6u";
-    if (password_verify($password, $hashcode))  //plain text, hashcode
-    {
-        echo "login success";
-    } else {
-        echo "login fail";
+    $email =  $_POST['email']; //it is name attribute value of form control
+    $password = $_POST['password']; //plain text
+    $sql = "SELECT * FROM admin WHERE email = :email";
+    //$sql = "select * from admin where $email=?";
+    $stmt = $conn->prepare($sql); //prevent SQL injection attack
+    $stmt->execute([':email' => $_POST['email']]);
+    //$stmt -> execute([$email]);
+    $adminInfo = $stmt->fetch();
+    //$errMsg = "";
+    //$hashcode = "$2y$10\$jnZGZmoV06lXbWi.l19h2e5fTKWeI1ts5qPf2nVto1LY3pFF/ld6u";
+    if ($adminInfo) { //email exist
+        $hashcode = $adminInfo['password'];
+        if (password_verify($password, $hashcode))  //plain text, hashcode
+        {
+            $_SESSION['email'] = $email;
+            //echo "login success hashcode";
+        } else //correct email and incorrect password
+        {
+            $errMsg = 'Incorrect Password!';
+            //echo "login fail hashcode";
+        }
+    } //if end
+    else { //email does not exit
+        $errMsg = 'Email does not exist!';
     }
 }
 ?>
@@ -37,6 +57,13 @@ if (isset($_POST['btnLogin'])) //login request
             <form action="login.php" class="form mt-5" method="post">
                 <fieldset>
                     <legend>Admin Login</legend>
+                    <?php
+                    if (isset($errMsg)) {
+                        echo "<p class='alert alert-danger'>$errMsg</p>";
+                        unset($errMsg);
+                    }
+                    ?>
+
                     <div class="mb-1">
                         <label for="">Email</label>
                         <input type="email" class="form-control" name="email">
