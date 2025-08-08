@@ -27,8 +27,6 @@
                             Category Name
                         </label>
                         <input type="text" class="form-control" name="catName">
-
-
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary rounded" name="btnAdd">Add Category</button>
