@@ -20,7 +20,7 @@
             <?php require_once "navigation.php"; ?>
         </div>
         <div class="row">
-            <div class="col-md-8 mx-auto py-5">
+            <div class="col-md-6 mx-auto py-5">
                 <form action="insertCategory.php" method="post" class="form">
                     <div class="mb-3">
                         <label for="" class="form-label">
@@ -36,11 +36,6 @@
                 </form>
             </div>
         </div>
-
-
-
-
-
     </div>
 </body>
 
