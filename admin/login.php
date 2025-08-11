@@ -46,40 +46,40 @@ if (isset($_POST['btnLogin'])) //login request
 
 <body>
 
-    <div class="container-fluid"></div>
-    <div class="row">
-        <?php
-        require_once "navigation.php";
-        ?>
-    </div>
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <form action="login.php" class="form mt-5" method="post">
-                <fieldset>
-                    <legend>Admin Login</legend>
-                    <?php
-                    if (isset($errMsg)) {
-                        echo "<p class='alert alert-danger'>$errMsg</p>";
-                        unset($errMsg);
-                    }
-                    ?>
+    <div class="container-fluid">
+        <div class="row">
+            <?php
+            require_once "navigation.php";
+            ?>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form action="login.php" class="form mt-5" method="post">
+                    <fieldset>
+                        <legend>Admin Login</legend>
+                        <?php
+                        if (isset($errMsg)) {
+                            echo "<p class='alert alert-danger'>$errMsg</p>";
+                            unset($errMsg);
+                        }
+                        ?>
 
-                    <div class="mb-1">
-                        <label for="">Email</label>
-                        <input type="email" class="form-control" name="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-2" name="btnLogin">
-                        Login
-                    </button>
-                </fieldset>
-            </form>
+                        <div class="mb-1">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2" name="btnLogin">
+                            Login
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>
