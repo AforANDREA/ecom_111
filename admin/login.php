@@ -20,6 +20,7 @@ if (isset($_POST['btnLogin'])) //login request
         if (password_verify($password, $hashcode))  //plain text, hashcode
         {
             $_SESSION['email'] = $email;
+            header('Location: viewInfo.php');
             //echo "login success hashcode";
         } else //correct email and incorrect password
         {
