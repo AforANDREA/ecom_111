@@ -31,8 +31,10 @@ try {
         <div class="row">
             <div class="col-md-2 mx-auto py-5">
                 <div class="card">
-                    <a href="insertCategory.php" class="btn btn-outline-primary rounded">Insert Category</a>
+                    <a href="insertCategory.php" class="btn btn-outline-primary rounded mb-2">Insert Category</a>
+                    <a href="insertProduct.php" class="btn btn-outline-primary rounded mb-2">Insert Product</a>
                 </div>
+                
             </div>
             <div class="col-md-10 mx-auto py-5">
                 <?php
