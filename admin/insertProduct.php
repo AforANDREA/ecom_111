@@ -11,7 +11,36 @@ try {
 }
 //when insert btn clicked
 if(isset($_POST["insertBtn"])) {
-    echo"$_POST[pname]<br>$_POST[category]<br>$_POST[description]<br>$_POST[sprice]<br>$_POST[bprice]<br>$_POST[quantity]<br>";
+    $productName = $_POST['pname'];
+    $category = $_POST['category'];
+    $desc = $_POST['description'];
+    $sellPrice = $_POST['sprice'];
+    $buyPrice = $_POST['bprice'];
+    $qty = $_POST['quantity'];
+    $productImage = $_FILES['pimg'];
+    $filePath = "productImages/".$productImage['name'];
+    // echo $productImage['name']."<br>";
+    // echo $productImage['type']."<br>";
+    // echo $productImage['size']."<br>";
+    // echo $productImage['tmp_name']."<br>";
+
+    //move temp file into specified dierctory
+    try{
+    if(move_uploaded_file($productImage['tmp_name'],$filePath))
+    {
+        $sql = 'insert into product 
+        (product_name,cost,price,description,image_path,category,quantity)
+        value(?, ?, ?, ?, ?, ?, ?)';
+        $stmt = $conn->prepare($sql);
+        $flag = $stmt->execute([$productName, $buyPrice, $sellPrice, $desc, $filePath, $category, $qty]);
+        if($flag)
+        {
+            header('Location: viewInfo.php');
+        }
+    }
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -31,10 +60,10 @@ if(isset($_POST["insertBtn"])) {
             <?php require_once "navigation.php"; ?>
         </div>
         <div class="row">
-            <div class="col-md-12 mx-auto py-5">
+            <div class="col-md-6 py-5 mx-auto">
                 <form action="insertProduct.php" class="form card" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row mx-auto">
+                        <div class="col-md-6">
                             <div class="mb-2">
                                 <label for="pname" class="form-label">Product Name</label>
                                 <input type="text" class="form-control" name="pname" id="pname" required>
@@ -81,7 +110,6 @@ if(isset($_POST["insertBtn"])) {
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
