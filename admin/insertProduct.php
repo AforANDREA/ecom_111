@@ -33,9 +33,11 @@ if(isset($_POST["insertBtn"])) {
         value(?, ?, ?, ?, ?, ?, ?)';
         $stmt = $conn->prepare($sql);
         $flag = $stmt->execute([$productName, $buyPrice, $sellPrice, $desc, $filePath, $category, $qty]);
+        echo "<script>alert('upload success MF');</script>";
         if($flag)
         {
             header('Location: viewInfo.php');
+            exit();
         }
     }
     } catch (Exception $e) {
