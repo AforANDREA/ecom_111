@@ -33,10 +33,13 @@ if(isset($_POST["insertBtn"])) {
         value(?, ?, ?, ?, ?, ?, ?)';
         $stmt = $conn->prepare($sql);
         $flag = $stmt->execute([$productName, $buyPrice, $sellPrice, $desc, $filePath, $category, $qty]);
-        echo "<script>alert('upload success MF');</script>";
+        //echo "<script>alert('upload success MF');</script>";
         if($flag)
         {
-            header('Location: viewInfo.php');
+            $id = $conn->lastInsertId();
+            $insertProduct = "Product with id $id has been inserted!";
+            $_SESSION["message"] = $insertProduct;
+            header('Location: viewInfo.php?show=products');
             exit();
         }
     }

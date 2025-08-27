@@ -18,7 +18,10 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="viewInfo.php">View Info</a>
+          <a class="nav-link" href="viewInfo.php?show=categories">Categories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="viewInfo.php?show=products">Products</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

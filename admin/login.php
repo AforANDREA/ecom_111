@@ -19,8 +19,10 @@ if (isset($_POST['btnLogin'])) //login request
         $hashcode = $adminInfo['password'];
         if (password_verify($password, $hashcode))  //plain text, hashcode
         {
+            $_SESSION['admin_login'] = true;
             $_SESSION['email'] = $email;
-            header('Location: viewInfo.php');
+            header('Location: viewInfo.php?show=products');
+            //$_SESSION['email'] = $email;
             //echo "login success hashcode";
         } else //correct email and incorrect password
         {
