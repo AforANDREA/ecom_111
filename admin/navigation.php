@@ -1,5 +1,8 @@
 <?php 
-
+// if (!isset($_SESSION[""])) 
+// {
+// session_start();
+// }
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -17,12 +20,20 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
+        <?php if(isset($_SESSION['admin_login'])){?>
         <li class="nav-item">
           <a class="nav-link" href="viewInfo.php?show=categories">Categories</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="viewInfo.php?show=products">Products</a>
         </li>
+        <li class="nav-item">
+          <span class = "nav-link disabled"><?php echo $_SESSION['email']?></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Log Out</a>
+        </li>
+        <?php } ?>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

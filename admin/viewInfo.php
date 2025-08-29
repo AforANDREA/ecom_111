@@ -52,18 +52,18 @@ if (isset($_GET['show']) && $_GET['show'] == "categories") {
         </div>
         <div class="row">
             <div class="col-md-2 mx-auto py-5">
-                <div class="card">
-                    <a href="insertCategory.php" class="btn btn-outline-primary rounded mb-2">Insert Category</a>
-                    <a href="insertProduct.php" class="btn btn-outline-primary rounded mb-2">Insert Product</a>
-                </div>
-
+                <?php if (isset($_SESSION['admin_login'])) { ?>
+                    <div class="card">
+                        <a href="insertCategory.php" class="btn btn-outline-primary rounded mb-2">Insert Category</a>
+                        <a href="insertProduct.php" class="btn btn-outline-primary rounded mb-2">Insert Product</a>
+                    </div>
+                <?php } ?>
             </div>
             <div class="col-md-10 mx-auto py-5">
                 <?php
                 if (isset($_SESSION['message'])) {
                     echo "<p class='alert alert-success'>$_SESSION[message]</p>";
                     unset($_SESSION["message"]);
-                    
                 }
                 ?>
                 <table class="table table-striped">
@@ -74,10 +74,13 @@ if (isset($_GET['show']) && $_GET['show'] == "categories") {
                             <td>$category[id]</td>
                             <td>$category[cat_name]</td>
                             <td>$category[description]</td>
+                            <td><a class='btn btn-primary btn-sm' href='editCategory.php?val=edit'>edit</a></td>
+                            <td><a class='btn btn-danger btn-sm' href=editCategory.php?val=del&id=$category[id]>delete</a></td>
+                            
                             </tr>";
                         } //foreach end
                     } //if end category
-                    else if(isset($products)) {
+                    else if (isset($products)) {
                         foreach ($products as $product) {
                             echo "<tr>
                             <td>$product[product_name]</td>
@@ -87,6 +90,8 @@ if (isset($_GET['show']) && $_GET['show'] == "categories") {
                             <td>$product[category]</td>
                             <td>$product[quantity]</td>
                             <td><img style=width:75px;height:75px; src=$product[image_path]></td>
+                            <td><a class='btn btn-primary btn-sm' href='editProduct.php?val=edit'>edit</a></td>
+                            <td><a class='btn btn-danger btn-sm' href=editProduct.php?val=del&id=$product[id]>delete</a></td>
                             </tr>";
                         }
                     }
